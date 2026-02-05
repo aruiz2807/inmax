@@ -9,14 +9,7 @@
 /vendor
 /public/build
 /public/hot
-/storage/*.key
-/storage/*.log
-/storage/framework/cache
-/storage/framework/sessions
-/storage/framework/testing
-/storage/framework/views
-/storage/framework/views/*.php
-/storage/logs
+
 /database/*.sqlite
 /database/*.sqlite-journal
 /database/database.sqlite
