@@ -1,0 +1,18 @@
+@import './theme.css'; /* By Sheaf.dev */
+@import "tailwindcss";
+
+@source "../views/**/*.blade.php";
+@source "../js/**/*.js";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+
+@custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */
+
+[x-cloak] {
+    display: none;
+}
+
+@layer components {
+    .ui-link {
+        @apply inline font-medium text-start underline underline-offset-[6px] hover:decoration-current text-neutral-800 dark:text-white decoration-neutral-800/20 dark:decoration-white/20;
+    }
+}
