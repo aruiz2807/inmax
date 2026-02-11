@@ -7,8 +7,10 @@ import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.e
 
 // now you can register
 // components using Alpine.data(...) and
-// plugins using Alpine.plugin(...) 
+// plugins using Alpine.plugin(...)
 
 
- 
+// power grid tables
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
+
 Livewire.start();

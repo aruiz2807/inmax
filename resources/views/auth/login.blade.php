@@ -1,7 +1,13 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <x-ui.brand
+                href="/"
+                logo="/img/logo.png"
+                name="Inmax-Sure"
+                alt="Inmax"
+                logoClass="rounded-full size-12"
+            />
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -33,14 +39,14 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="ui-link text-sm" href="{{ route('password.request') }}">
+                    <a class="ui-link text-sm pr-4" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
 
-                <x-button class="ms-4">
+                <x-ui.button type="submit" color="teal" icon="arrow-left-end-on-rectangle">
                     {{ __('Log in') }}
-                </x-button>
+                </x-ui.button>
             </div>
         </form>
     </x-authentication-card>

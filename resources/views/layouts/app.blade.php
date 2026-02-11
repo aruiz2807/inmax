@@ -17,6 +17,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
+
     <body class="font-sans antialiased text-neutral-900 bg-neutral-50 dark:text-neutral-50 dark:bg-neutral-950">
         <x-banner />
 
@@ -24,10 +25,8 @@
             <x-ui.sidebar>
                 <x-slot name="brand">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2 px-2 py-2">
+                        <!-- Logo -->
                         <x-application-mark class="block h-8 w-auto" />
-                        <span data-slot="brand-name" class="text-sm font-semibold text-neutral-900 dark:text-white">
-                            {{ config('app.name', 'Laravel') }}
-                        </span>
                     </a>
                 </x-slot>
 
@@ -40,23 +39,36 @@
                         x-on:click="closeSidebar()"
                     />
 
-                    <x-ui.navlist.item
-                        icon="user-circle"
-                        :label="__('Profile')"
-                        href="{{ route('profile.show') }}"
-                        :active="request()->routeIs('profile.show')"
-                        x-on:click="closeSidebar()"
-                    />
-
-                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                    <x-ui.navlist.group
+                        label="Settings"
+                        :collapsable="true"
+                    >
                         <x-ui.navlist.item
-                            icon="key"
-                            :label="__('API Tokens')"
-                            href="{{ route('api-tokens.index') }}"
-                            :active="request()->routeIs('api-tokens.index')"
+                            icon="user-circle"
+                            :label="__('Profile')"
+                            href="{{ route('profile.show') }}"
+                            :active="request()->routeIs('profile.show')"
                             x-on:click="closeSidebar()"
                         />
-                    @endif
+
+                        <x-ui.navlist.item
+                            icon="wallet"
+                            :label="__('Services')"
+                            href="{{ route('services') }}"
+                            :active="request()->routeIs('services')"
+                            x-on:click="closeSidebar()"
+                        />
+
+                        @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                            <x-ui.navlist.item
+                                icon="key"
+                                :label="__('API Tokens')"
+                                href="{{ route('api-tokens.index') }}"
+                                :active="request()->routeIs('api-tokens.index')"
+                                x-on:click="closeSidebar()"
+                            />
+                        @endif
+                    </x-ui.navlist.group>
                 </x-ui.navlist>
 
                 <x-ui.sidebar.push />
@@ -75,72 +87,61 @@
 
                         <div class="flex-1"></div>
 
-                        <x-ui.navbar class="flex-1">
-                            <x-ui.navbar.item
-                                icon="home"
-                                :label="__('Dashboard')"
-                                href="{{ route('dashboard') }}"
-                                :active="request()->routeIs('dashboard')"
-                            />
-
-                            <x-ui.navbar.item
-                                icon="user-circle"
-                                :label="__('Profile')"
-                                href="{{ route('profile.show') }}"
-                                :active="request()->routeIs('profile.show')"
-                            />
-
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-ui.navbar.item
-                                    icon="key"
-                                    :label="__('API Tokens')"
-                                    href="{{ route('api-tokens.index') }}"
-                                    :active="request()->routeIs('api-tokens.index')"
-                                />
-                            @endif
-                        </x-ui.navbar>
-
                         <div class="flex items-center gap-2">
                             <x-ui.theme-switcher variant="dropdown" />
 
-                            <x-dropdown align="right" width="48">
-                                <x-slot name="trigger">
-                                    <button
-                                        type="button"
-                                        class="inline-flex items-center justify-center size-9 rounded-full border border-black/10 bg-white dark:bg-neutral-900 dark:border-white/10 hover:bg-neutral-900/5 dark:hover:bg-white/10 transition"
-                                        aria-label="{{ __('Account menu') }}"
-                                    >
-                                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                            <img class="size-7 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                                        @else
-                                            <x-ui.icon name="user-circle" class="size-6" />
-                                        @endif
-                                    </button>
-                                </x-slot>
+                            <x-ui.dropdown>
+                                <x-slot:button
+                                    class="cursor-pointer hover:opacity-80 transition"
+                                    role="button"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    aria-controls="theme-menu"
+                                >
+                                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                        <img class="size-7 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    @else
+                                        <x-ui.icon name="user-circle" variant="mini" class="inline-flex"/>
+                                    @endif
+                                </x-slot:button>
 
-                                <x-slot name="content">
-                                    <div class="block px-4 py-2 text-xs text-neutral-400">
-                                        {{ __('Manage Account') }}
-                                    </div>
+                                <x-slot:menu>
+                                    <x-ui.dropdown.item
+                                        icon="user"
+                                        iconVariant="mini"
+                                        href="{{ route('profile.show') }}"
+                                    >
+                                        {{ __('Profile') }}
+                                    </x-ui.dropdown.item>
 
                                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                        <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                            {{ __('API Tokens') }}
-                                        </x-dropdown-link>
+                                    <x-ui.dropdown.item
+                                        icon="key"
+                                        iconVariant="mini"
+                                        href="{{ route('api-tokens.index') }}"
+                                    >
+                                        {{ __('API Tokens') }}
+                                    </x-ui.dropdown.item>
                                     @endif
 
-                                    <div class="border-t border-black/10 dark:border-white/10 my-1"></div>
+                                    <x-ui.dropdown.separator />
 
-                                    <form method="POST" action="{{ route('logout') }}" x-data>
-                                        @csrf
-
-                                        <x-dropdown-link href="{{ route('logout') }}"
-                                                 @click.prevent="$root.submit();">
-                                            {{ __('Log Out') }}
-                                        </x-dropdown-link>
-                                    </form>
-                                </x-slot>
-                            </x-dropdown>
+                                    <x-ui.dropdown.item
+                                        icon="arrow-left-start-on-rectangle"
+                                        iconVariant="mini"
+                                    >
+                                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                            @csrf
+                                             <button
+                                                type="submit"
+                                                class="flex w-full items-center gap-2 text-left"
+                                            >
+                                                {{ __('Log Out') }}
+                                            </button>
+                                        </form>
+                                    </x-ui.dropdown.item>
+                                </x-slot:menu>
+                            </x-ui.dropdown>
                         </div>
                     </div>
                 </x-ui.layout.header>
@@ -150,6 +151,8 @@
                 </div>
             </x-ui.layout.main>
         </x-ui.layout>
+
+        <x-ui.toast position="bottom-right" maxToasts="5" />
 
         @stack('modals')
 

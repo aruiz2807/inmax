@@ -19,7 +19,8 @@
             "badge",
             "navlist",
             "sidebar",
-            "navbar"
+            "navbar",
+            "radio"
         ],
         "button": [
             "badge",
