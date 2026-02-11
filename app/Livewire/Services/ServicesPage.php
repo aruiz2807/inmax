@@ -4,7 +4,7 @@ namespace App\Livewire\Services;
 
 use App\Livewire\Forms\ServicesForm;
 use App\Models\Service;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -13,17 +13,10 @@ class ServicesPage extends Component
     public ServicesForm $form;
     public ?int $serviceId = null;
 
+    #[Layout('layouts.app')]
     public function render()
     {
-        $layout = '';
-
-        //passing layout according to business logic
-        if(Auth::user())
-        {
-            $layout = 'layouts.app';
-        }
-
-        return view('livewire.services.services-page')->layout($layout);
+        return view('livewire.services.services-page');
     }
 
     #[On('editService')]

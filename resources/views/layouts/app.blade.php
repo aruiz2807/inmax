@@ -59,6 +59,14 @@
                             x-on:click="closeSidebar()"
                         />
 
+                        <x-ui.navlist.item
+                            icon="wallet"
+                            :label="__('Specialties')"
+                            href="{{ route('specialties') }}"
+                            :active="request()->routeIs('specialties')"
+                            x-on:click="closeSidebar()"
+                        />
+
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-ui.navlist.item
                                 icon="key"

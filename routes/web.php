@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ServiceController;
 use App\Livewire\Services\ServicesPage;
+use App\Livewire\Specialties\SpecialtiesPage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,10 +18,11 @@ Route::middleware([
     })->name('dashboard');
 
 /*services*/
-    //Route::get('/services', [ServiceController::class, 'show'])->name('services');
-    Route::post('/services', [ServiceController::class, 'store'])->name('service.store');
+    Route::get('/services', ServicesPage::class)->name('services');
 /*--------*/
 
-    Route::get('/services', ServicesPage::class)->name('services');
+/*specialties*/
+    Route::get('/specialties', SpecialtiesPage::class)->name('specialties');
+/*--------*/
 
 });
