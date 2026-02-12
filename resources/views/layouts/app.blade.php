@@ -39,6 +39,14 @@
                         x-on:click="closeSidebar()"
                     />
 
+                    <x-ui.navlist.item
+                        icon="users"
+                        :label="__('Doctors')"
+                        href="{{ route('doctors') }}"
+                        :active="request()->routeIs('doctors')"
+                        x-on:click="closeSidebar()"
+                    />
+
                     <x-ui.navlist.group
                         label="Settings"
                         :collapsable="true"

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Doctors\DoctorsPage;
 use App\Livewire\Services\ServicesPage;
 use App\Livewire\Specialties\SpecialtiesPage;
 
@@ -23,6 +24,10 @@ Route::middleware([
 
 /*specialties*/
     Route::get('/specialties', SpecialtiesPage::class)->name('specialties');
+/*--------*/
+
+/*doctors*/
+    Route::get('/doctors', DoctorsPage::class)->name('doctors');
 /*--------*/
 
 });
