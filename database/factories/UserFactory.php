@@ -26,13 +26,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker
+            ? $this->faker->name()
+            : 'User '.Str::title(Str::random(8));
+
+        $email = $this->faker
+            ? $this->faker->unique()->safeEmail()
+            : 'user_'.Str::lower(Str::random(12)).'@example.com';
+
+        $phone = $this->faker
+            ? $this->faker->unique()->numerify('##########')
+            : str_pad((string) random_int(0, 9999999999), 10, '0', STR_PAD_LEFT);
+
         return [
-            'name' => $this->faker->name(),
+            'name' => $name,
             'profile' => 'User',
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => $email,
             'email_verified_at' => now(),
             'phone_verified_at' => null,
-            'phone' => $this->faker->unique()->numerify('##########'),
+            'phone' => $phone,
             'password' => static::$password ??= Hash::make('password'),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
