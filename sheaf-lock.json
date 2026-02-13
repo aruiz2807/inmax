@@ -8,7 +8,11 @@
             "modal"
         ]
     },
-    "helpers": [],
+    "helpers": {
+        "popup": [
+            "select"
+        ]
+    },
     "internalDependencies": {
         "icon": [
             "button",
@@ -20,7 +24,8 @@
             "navlist",
             "sidebar",
             "navbar",
-            "radio"
+            "radio",
+            "select"
         ],
         "button": [
             "badge",
@@ -38,6 +43,9 @@
         ],
         "dropdown": [
             "theme-switcher"
+        ],
+        "text": [
+            "select"
         ]
     }
 }

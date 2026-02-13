@@ -17,7 +17,7 @@ class DoctorsForm extends Form
     #[Validate('required|string|email|max:255|unique:users')]
     public $email = '';
 
-    #[Validate('required|string|max:10|unique:users')]
+    #[Validate('required|string|size:10|unique:users')]
     public $phone = '';
 
     #[Validate('required')]
@@ -39,7 +39,11 @@ class DoctorsForm extends Form
     {
         $this->validate();
 
-        $user = $this->createUser([$this->name, $this->email, $this->phone]);
+        $user = $this->createUser([
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone
+        ]);
 
         Doctor::create([
             'user_id' => $user->id,
@@ -75,7 +79,7 @@ class DoctorsForm extends Form
         $this->name = $doctor->name;
         $this->email = $doctor->email;
         $this->phone = $doctor->phone;
-        $this->specialty = $doctor->specialty_id;
+        $this->specialty = (string) $doctor->specialty_id;
         $this->license = $doctor->license;
         $this->university = $doctor->university;
         $this->address = $doctor->address;

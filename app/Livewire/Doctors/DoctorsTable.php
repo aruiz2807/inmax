@@ -44,11 +44,10 @@ final class DoctorsTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id')
-            ->add('user_id')
-            ->add('specialty_id')
-            ->add('license')
-            ->add('university')
-            ->add('address')
+            ->add('name')
+            ->add('email')
+            ->add('phone')
+            ->add('specialty')
             ->add('status_toggle', fn ($model) => $model->status === 'Active')
             ->add('created_at')
             ->add('created_at_formatted', function ($model) {
@@ -61,13 +60,17 @@ final class DoctorsTable extends PowerGridComponent
         return [
             Column::make('Id', 'id'),
 
-            Column::make('User id', 'user_id'),
-
-            Column::make('Specialty id', 'specialty_id'),
-
-            Column::make('License', 'license')
+            Column::make('Nombre', 'name')
                 ->sortable()
                 ->searchable(),
+
+            Column::make('Correo', 'email')
+                ->searchable(),
+
+            Column::make('Telefono', 'phone'),
+
+            Column::make('Especialidad', 'specialty')
+                ->sortable(),
 
             Column::make('Fecha registro', 'created_at_formatted', 'created_at')
                 ->sortable(),
@@ -86,7 +89,7 @@ final class DoctorsTable extends PowerGridComponent
     {
         return [
             Button::add('edit')
-                ->slot('Edit: '.$row->id)
+                ->slot('Editar')
                 ->id()
                 ->class('bg-teal-600 text-white px-3 py-1 rounded')
                 ->dispatch('editDoctor', ['doctorId' => $row->id])

@@ -4,20 +4,26 @@ namespace App\Livewire\Doctors;
 
 use App\Livewire\Forms\DoctorsForm;
 use App\Models\Doctor;
+use App\Models\Specialty;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use PhpParser\Comment\Doc;
 
 class DoctorsPage extends Component
 {
     public DoctorsForm $form;
     public ?int $doctorId = null;
+    public $specialties = [];
 
     #[Layout('layouts.app')]
     public function render()
     {
         return view('livewire.doctors.doctors-page');
+    }
+
+    public function mount()
+    {
+        $this->specialties = Specialty::orderBy('name')->get();
     }
 
     #[On('editDoctor')]
