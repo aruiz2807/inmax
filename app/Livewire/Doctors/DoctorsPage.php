@@ -52,7 +52,7 @@ class DoctorsPage extends Component
         // Show success toast
         $this->dispatch('notify',
             type: 'success',
-            content:'Doctor almacenado exitosamente!',
+            content:'Medico almacenado exitosamente!',
             duration: 4000
         );
 

@@ -72,13 +72,13 @@ class DoctorsForm extends Form
     }
 
     /**
-    * Sets the service to edit.
+    * Sets the doctor to edit.
     */
     public function set(Doctor $doctor)
     {
-        $this->name = $doctor->name;
-        $this->email = $doctor->email;
-        $this->phone = $doctor->phone;
+        $this->name = $doctor->user->name;
+        $this->email = $doctor->user->email;
+        $this->phone = $doctor->user->phone;
         $this->specialty = (string) $doctor->specialty_id;
         $this->license = $doctor->license;
         $this->university = $doctor->university;
@@ -86,7 +86,7 @@ class DoctorsForm extends Form
     }
 
     /**
-    * Updates the service in the DB.
+    * Updates the doctor in the DB.
     */
     public function update($doctorId)
     {

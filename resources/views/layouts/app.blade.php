@@ -33,35 +33,35 @@
                 <x-ui.navlist class="mt-2">
                     <x-ui.navlist.item
                         icon="home"
-                        :label="__('Dashboard')"
+                        :label="__('app.home')"
                         href="{{ route('dashboard') }}"
                         :active="request()->routeIs('dashboard')"
                         x-on:click="closeSidebar()"
                     />
 
                     <x-ui.navlist.item
+                        icon="identification"
+                        :label="__('app.policies')"
+                        href="{{ route('policies') }}"
+                        :active="request()->routeIs('policies')"
+                        x-on:click="closeSidebar()"
+                    />
+
+                    <x-ui.navlist.item
                         icon="users"
-                        :label="__('Doctors')"
+                        :label="__('app.doctors')"
                         href="{{ route('doctors') }}"
                         :active="request()->routeIs('doctors')"
                         x-on:click="closeSidebar()"
                     />
 
                     <x-ui.navlist.group
-                        label="Settings"
+                        :label="__('app.settings')"
                         :collapsable="true"
                     >
                         <x-ui.navlist.item
-                            icon="user-circle"
-                            :label="__('Profile')"
-                            href="{{ route('profile.show') }}"
-                            :active="request()->routeIs('profile.show')"
-                            x-on:click="closeSidebar()"
-                        />
-
-                        <x-ui.navlist.item
                             icon="wallet"
-                            :label="__('Services')"
+                            :label="__('app.services')"
                             href="{{ route('services') }}"
                             :active="request()->routeIs('services')"
                             x-on:click="closeSidebar()"
@@ -69,9 +69,17 @@
 
                         <x-ui.navlist.item
                             icon="wallet"
-                            :label="__('Specialties')"
+                            :label="__('app.specialties')"
                             href="{{ route('specialties') }}"
                             :active="request()->routeIs('specialties')"
+                            x-on:click="closeSidebar()"
+                        />
+
+                        <x-ui.navlist.item
+                            icon="wallet"
+                            :label="__('app.plans')"
+                            href="{{ route('plans') }}"
+                            :active="request()->routeIs('plans')"
                             x-on:click="closeSidebar()"
                         />
 
@@ -127,7 +135,7 @@
                                         iconVariant="mini"
                                         href="{{ route('profile.show') }}"
                                     >
-                                        {{ __('Profile') }}
+                                        {{ __('app.profile') }}
                                     </x-ui.dropdown.item>
 
                                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -152,7 +160,7 @@
                                                 type="submit"
                                                 class="flex w-full items-center gap-2 text-left"
                                             >
-                                                {{ __('Log Out') }}
+                                                {{ __('app.logout') }}
                                             </button>
                                         </form>
                                     </x-ui.dropdown.item>
@@ -172,6 +180,6 @@
 
         @stack('modals')
 
-        @livewireScripts
+
     </body>
 </html>

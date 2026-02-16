@@ -87,6 +87,9 @@
         },
         "textarea": {
             "installationTime": 1770938879
+        },
+        "switch": {
+            "installationTime": 1771203621
         }
     }
 }

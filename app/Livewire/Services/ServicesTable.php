@@ -45,7 +45,7 @@ final class ServicesTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('name')
-            ->add('type')
+            ->add('type', fn ($model) => $model->type === 'Event' ? 'Evento' : 'Importe')
             ->add('status')
             ->add('status_toggle', fn ($model) => $model->status === 'Active')
             ->add('created_at')
@@ -72,7 +72,7 @@ final class ServicesTable extends PowerGridComponent
 
             Column::make('Fecha registro', 'created_at_formatted', 'created_at')
                 ->sortable()
-                ->searchable(),
+                ->hidden(isHidden: true, isForceHidden: false),
 
             Column::action('Opciones')
         ];
